@@ -8,16 +8,16 @@ import { Closing } from "./scenes/Closing";
 import { LogoOutro } from "./scenes/LogoOutro";
 
 export const SecurityVideo: React.FC = () => {
-  // 30fps × 47.5s = 1425 frames total (음성 길이에 맞춤)
-  // [0–4s]    Opening:        0–120
-  // [4–6.5s]  Transition:     120–195
-  // [6.5–12s] Rule 1:         195–360
-  // [12–17.5s] Rule 2:        360–525
-  // [17.5–23s] Rule 3:        525–690
-  // [23–28.5s] Rule 4:        690–855
-  // [28.5–35s] Rule 5:        855–1050
-  // [35–41s]  Closing:        1050–1230
-  // [41–47.5s] Logo Outro:    1230–1425
+  // 30fps × 32.3s = 970 frames total (새 Voice.mp3 길이에 맞춤)
+  // [0–3s]     Opening:        0–90
+  // [3–4.5s]   Transition:     90–135
+  // [4.5–8.5s] Rule 1:         135–255
+  // [8.5–12.5s] Rule 2:        255–375
+  // [12.5–16.5s] Rule 3:       375–495
+  // [16.5–20.5s] Rule 4:       495–615
+  // [20.5–24.5s] Rule 5:       615–735
+  // [24.5–28.5s] Closing:      735–855
+  // [28.5–32.3s] Logo Outro:   855–970
 
   const rules = [
     {
@@ -63,17 +63,17 @@ export const SecurityVideo: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: "#0F172A" }}>
       <Audio src={staticFile("Voice.mp3")} />
 
-      <Sequence from={0} durationInFrames={120}>
+      <Sequence from={0} durationInFrames={90}>
         <Opening />
       </Sequence>
 
-      <Sequence from={120} durationInFrames={75}>
+      <Sequence from={90} durationInFrames={45}>
         <MessageTransition />
       </Sequence>
 
       {rules.map((rule, i) => {
-        const starts = [195, 360, 525, 690, 855];
-        const durations = [165, 165, 165, 165, 195];
+        const starts = [135, 255, 375, 495, 615];
+        const durations = [120, 120, 120, 120, 120];
         return (
           <Sequence
             key={rule.number}
@@ -92,11 +92,11 @@ export const SecurityVideo: React.FC = () => {
         );
       })}
 
-      <Sequence from={1050} durationInFrames={180}>
+      <Sequence from={735} durationInFrames={120}>
         <Closing />
       </Sequence>
 
-      <Sequence from={1230} durationInFrames={195}>
+      <Sequence from={855} durationInFrames={115}>
         <LogoOutro />
       </Sequence>
     </AbsoluteFill>
