@@ -4,9 +4,10 @@ import { Opening } from "./scenes/Opening";
 import { MessageTransition } from "./scenes/MessageTransition";
 import { RuleScene } from "./scenes/RuleScene";
 import { Closing } from "./scenes/Closing";
+import { LogoOutro } from "./scenes/LogoOutro";
 
 export const SecurityVideo: React.FC = () => {
-  // 30fps × 30s = 900 frames total
+  // 30fps × 35s = 1050 frames total
   // [0–3s]   Opening:        0–90
   // [3–5s]   Transition:     90–150
   // [5–9s]   Rule 1:         150–270
@@ -15,6 +16,7 @@ export const SecurityVideo: React.FC = () => {
   // [17–21s] Rule 4:         510–630
   // [21–26s] Rule 5:         630–780
   // [26–30s] Closing:        780–900
+  // [30–35s] Logo Outro:     900–1050
 
   const rules = [
     {
@@ -89,6 +91,10 @@ export const SecurityVideo: React.FC = () => {
 
       <Sequence from={780} durationInFrames={120}>
         <Closing />
+      </Sequence>
+
+      <Sequence from={900} durationInFrames={150}>
+        <LogoOutro />
       </Sequence>
     </AbsoluteFill>
   );
