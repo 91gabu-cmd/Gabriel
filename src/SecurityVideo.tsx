@@ -8,16 +8,16 @@ import { Closing } from "./scenes/Closing";
 import { LogoOutro } from "./scenes/LogoOutro";
 
 export const SecurityVideo: React.FC = () => {
-  // 30fps × 32.3s = 970 frames total (새 Voice.mp3 길이에 맞춤)
+  // 30fps × 32.3s = 970 frames total (Voice.mp3 대본 타이밍에 맞춤)
   // [0–3s]     Opening:        0–90
-  // [3–4.5s]   Transition:     90–135
-  // [4.5–8.5s] Rule 1:         135–255
-  // [8.5–12.5s] Rule 2:        255–375
-  // [12.5–16.5s] Rule 3:       375–495
-  // [16.5–20.5s] Rule 4:       495–615
-  // [20.5–24.5s] Rule 5:       615–735
-  // [24.5–28.5s] Closing:      735–855
-  // [28.5–32.3s] Logo Outro:   855–970
+  // [3–5s]     Transition:     90–150
+  // [5–9s]     Rule 1:         150–270
+  // [9–13s]    Rule 2:         270–390
+  // [13–17s]   Rule 3:         390–510
+  // [17–21s]   Rule 4:         510–630
+  // [21–26s]   Rule 5:         630–780
+  // [26–30s]   Closing:        780–900
+  // [30–32.3s] Logo Outro:     900–970
 
   const rules = [
     {
@@ -67,13 +67,13 @@ export const SecurityVideo: React.FC = () => {
         <Opening />
       </Sequence>
 
-      <Sequence from={90} durationInFrames={45}>
+      <Sequence from={90} durationInFrames={60}>
         <MessageTransition />
       </Sequence>
 
       {rules.map((rule, i) => {
-        const starts = [135, 255, 375, 495, 615];
-        const durations = [120, 120, 120, 120, 120];
+        const starts = [150, 270, 390, 510, 630];
+        const durations = [120, 120, 120, 120, 150];
         return (
           <Sequence
             key={rule.number}
@@ -92,11 +92,11 @@ export const SecurityVideo: React.FC = () => {
         );
       })}
 
-      <Sequence from={735} durationInFrames={120}>
+      <Sequence from={780} durationInFrames={120}>
         <Closing />
       </Sequence>
 
-      <Sequence from={855} durationInFrames={115}>
+      <Sequence from={900} durationInFrames={70}>
         <LogoOutro />
       </Sequence>
     </AbsoluteFill>

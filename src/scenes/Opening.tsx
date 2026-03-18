@@ -89,7 +89,7 @@ export const Opening: React.FC = () => {
         </div>
 
         <AnimatedText
-          text="악성코드와 바이러스 변종으로 인해"
+          text="최근 악성코드와 바이러스 변종으로 인해"
           fontSize={42}
           color="#F87171"
           delay={10}

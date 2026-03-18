@@ -29,7 +29,7 @@ export const MessageTransition: React.FC = () => {
   });
 
   // Exit fade
-  const exitOpacity = interpolate(frame, [45, 60], [1, 0], {
+  const exitOpacity = interpolate(frame, [50, 60], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -85,6 +85,15 @@ export const MessageTransition: React.FC = () => {
           </div>
           <div style={{ fontSize: 56, color: "#FFFFFF", fontWeight: 800 }}>
             정보보안 5대 수칙
+          </div>
+          <div
+            style={{
+              fontSize: 30,
+              color: "#93C5FD",
+              marginTop: 8,
+            }}
+          >
+            확인하세요.
           </div>
         </div>
 
