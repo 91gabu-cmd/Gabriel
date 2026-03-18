@@ -18,6 +18,7 @@
   "dependencies": {
     "@remotion/bundler": "^4.0.436",
     "@remotion/cli": "^4.0.436",
+    "@remotion/media": "4.0.436",
     "@types/react": "^19.2.14",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

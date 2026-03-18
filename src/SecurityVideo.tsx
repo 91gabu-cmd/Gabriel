@@ -1,5 +1,6 @@
 import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import { AbsoluteFill, Sequence, staticFile } from "remotion";
+import { Audio } from "@remotion/media";
 import { Opening } from "./scenes/Opening";
 import { MessageTransition } from "./scenes/MessageTransition";
 import { RuleScene } from "./scenes/RuleScene";
@@ -7,16 +8,16 @@ import { Closing } from "./scenes/Closing";
 import { LogoOutro } from "./scenes/LogoOutro";
 
 export const SecurityVideo: React.FC = () => {
-  // 30fps × 35s = 1050 frames total
-  // [0–3s]   Opening:        0–90
-  // [3–5s]   Transition:     90–150
-  // [5–9s]   Rule 1:         150–270
-  // [9–13s]  Rule 2:         270–390
-  // [13–17s] Rule 3:         390–510
-  // [17–21s] Rule 4:         510–630
-  // [21–26s] Rule 5:         630–780
-  // [26–30s] Closing:        780–900
-  // [30–35s] Logo Outro:     900–1050
+  // 30fps × 47.5s = 1425 frames total (음성 길이에 맞춤)
+  // [0–4s]    Opening:        0–120
+  // [4–6.5s]  Transition:     120–195
+  // [6.5–12s] Rule 1:         195–360
+  // [12–17.5s] Rule 2:        360–525
+  // [17.5–23s] Rule 3:        525–690
+  // [23–28.5s] Rule 4:        690–855
+  // [28.5–35s] Rule 5:        855–1050
+  // [35–41s]  Closing:        1050–1230
+  // [41–47.5s] Logo Outro:    1230–1425
 
   const rules = [
     {
@@ -60,17 +61,19 @@ export const SecurityVideo: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#0F172A" }}>
-      <Sequence from={0} durationInFrames={90}>
+      <Audio src={staticFile("Voice.mp3")} />
+
+      <Sequence from={0} durationInFrames={120}>
         <Opening />
       </Sequence>
 
-      <Sequence from={90} durationInFrames={60}>
+      <Sequence from={120} durationInFrames={75}>
         <MessageTransition />
       </Sequence>
 
       {rules.map((rule, i) => {
-        const starts = [150, 270, 390, 510, 630];
-        const durations = [120, 120, 120, 120, 150];
+        const starts = [195, 360, 525, 690, 855];
+        const durations = [165, 165, 165, 165, 195];
         return (
           <Sequence
             key={rule.number}
@@ -89,11 +92,11 @@ export const SecurityVideo: React.FC = () => {
         );
       })}
 
-      <Sequence from={780} durationInFrames={120}>
+      <Sequence from={1050} durationInFrames={180}>
         <Closing />
       </Sequence>
 
-      <Sequence from={900} durationInFrames={150}>
+      <Sequence from={1230} durationInFrames={195}>
         <LogoOutro />
       </Sequence>
     </AbsoluteFill>
